@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
+import winesRouter from './routes/wines';
 
 dotenv.config();
 
@@ -24,9 +25,13 @@ app.get('/api/test', (req, res) => {
   });
 });
 
+// Routes
+app.use('/api/wines', winesRouter);
+
 // Start server
 app.listen(PORT, () => {
   console.log(`✅ Server running on port ${PORT}`);
   console.log(`📍 http://localhost:${PORT}`);
   console.log(`🏥 Health check: http://localhost:${PORT}/health`);
+  console.log(`🍷 Wines API: http://localhost:${PORT}/api/wines/search`);
 });
