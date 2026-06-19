@@ -1,37 +1,36 @@
 import express from 'express';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import winesRouter from './routes/wines';
 
 dotenv.config();
 
 const app = express();
-const PORT = parseInt(process.env.PORT || process.env.BACKEND_PORT || '3001');
+const PORT = parseInt(process.env.PORT || '8000');
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
 // Health check
-app.get('/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Backend is running!' });
+app.get('/health', (req: any, res: any) => {
+  res.json({ status: 'OK' });
 });
 
-// Test route
-app.get('/api/test', (req, res) => {
-  res.json({
-    message: 'Welcome to WW - What Wine?',
-    database: process.env.DATABASE_URL ? 'Connected' : 'Not configured'
-  });
+// Wines search - mockup
+app.get('/api/wines/search', (req: any, res: any) => {
+  const wines = [
+    { id: '1', name: 'Carmenere Premium', producer: 'Viña Santa Rita', country: 'Chile', wine_type: 'tinto', price: 89.9, rating: 4.5 },
+    { id: '2', name: 'Malbec Reserva', producer: 'Catena Zapata', country: 'Argentina', wine_type: 'tinto', price: 120, rating: 4.7 },
+    { id: '3', name: 'Cabernet Sauvignon', producer: 'Robert Mondavi', country: 'USA', wine_type: 'tinto', price: 150, rating: 4.6 },
+    { id: '4', name: 'Pinot Grigio', producer: 'Ecco Domani', country: 'Itália', wine_type: 'branco', price: 45, rating: 4.2 },
+    { id: '5', name: 'Prosecco', producer: 'Santa Margherita', country: 'Itália', wine_type: 'espumante', price: 65, rating: 4.4 },
+  ];
+
+  const wineType = req.query.wineType;
+  const results = wineType ? wines.filter(w => w.wine_type === wineType) : wines;
+
+  res.json({ results, total: results.length });
 });
 
-// Routes
-app.use('/api/wines', winesRouter);
-
-// Start server
 app.listen(PORT, () => {
-  console.log(`✅ Server running on port ${PORT}`);
-  console.log(`📍 http://localhost:${PORT}`);
-  console.log(`🏥 Health check: http://localhost:${PORT}/health`);
-  console.log(`🍷 Wines API: http://localhost:${PORT}/api/wines/search`);
+  console.log(`Server running on port ${PORT}`);
 });
