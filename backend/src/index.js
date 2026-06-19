@@ -1,8 +1,6 @@
-import express from 'express';
-import cors from 'cors';
-import dotenv from 'dotenv';
-
-dotenv.config();
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
 
 const app = express();
 const PORT = parseInt(process.env.PORT || '8000');
@@ -11,12 +9,12 @@ app.use(cors());
 app.use(express.json());
 
 // Health check
-app.get('/health', (req: any, res: any) => {
+app.get('/health', (req, res) => {
   res.json({ status: 'OK' });
 });
 
 // Wines search - mockup
-app.get('/api/wines/search', (req: any, res: any) => {
+app.get('/api/wines/search', (req, res) => {
   const wines = [
     { id: '1', name: 'Carmenere Premium', producer: 'Viña Santa Rita', country: 'Chile', wine_type: 'tinto', price: 89.9, rating: 4.5 },
     { id: '2', name: 'Malbec Reserva', producer: 'Catena Zapata', country: 'Argentina', wine_type: 'tinto', price: 120, rating: 4.7 },
