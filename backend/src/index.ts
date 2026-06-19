@@ -9,7 +9,13 @@ const app = express();
 const PORT = parseInt(process.env.PORT || process.env.BACKEND_PORT || '3001');
 
 // Middleware
-app.use(cors());
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'https://ww-what-wine.vercel.app'
+  ],
+  credentials: true
+}));
 app.use(express.json());
 
 // Health check
