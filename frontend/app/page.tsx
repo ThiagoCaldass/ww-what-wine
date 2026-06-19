@@ -33,31 +33,31 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-red-900 via-red-800 to-red-700">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-800">
       <div className="max-w-6xl mx-auto px-4 py-12">
         {/* Header */}
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-2">
+          <h1 className="text-6xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-amber-400 to-red-500 mb-4">
             🍷 WW - What Wine?
           </h1>
-          <p className="text-red-100 text-lg">
+          <p className="text-xl text-gray-300">
             Descubra o vinho perfeito para você
           </p>
         </div>
 
         {/* Search Form */}
-        <div className="bg-white rounded-lg shadow-2xl p-8 mb-12">
+        <div className="bg-slate-800 border border-amber-700 rounded-xl shadow-2xl p-8 mb-12">
           <form onSubmit={handleSearch} className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               {/* Wine Type */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-amber-300 mb-3">
                   Tipo de Vinho
                 </label>
                 <select
                   value={wineType}
                   onChange={(e) => setWineType(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-slate-700 border border-amber-600 text-white rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
                 >
                   <option value="tinto">Tinto</option>
                   <option value="branco">Branco</option>
@@ -68,27 +68,22 @@ export default function Home() {
 
               {/* Sweetness */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
-                  Nível de Secura
+                <label className="block text-sm font-semibold text-amber-300 mb-3">
+                  Nível de Secura: {sweetness}/5
                 </label>
-                <div className="flex items-center gap-4">
-                  <input
-                    type="range"
-                    min="0"
-                    max="5"
-                    value={sweetness}
-                    onChange={(e) => setSweetness(Number(e.target.value))}
-                    className="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-                  />
-                  <span className="text-sm font-semibold text-gray-700 w-12">
-                    {sweetness}/5
-                  </span>
-                </div>
+                <input
+                  type="range"
+                  min="0"
+                  max="5"
+                  value={sweetness}
+                  onChange={(e) => setSweetness(Number(e.target.value))}
+                  className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
+                />
               </div>
 
               {/* Price Range */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-amber-300 mb-3">
                   Preço Mínimo: R$ {priceMin}
                 </label>
                 <input
@@ -97,13 +92,13 @@ export default function Home() {
                   max="500"
                   value={priceMin}
                   onChange={(e) => setPriceMin(Number(e.target.value))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
                 />
               </div>
 
               {/* Max Price */}
               <div>
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-amber-300 mb-3">
                   Preço Máximo: R$ {priceMax}
                 </label>
                 <input
@@ -112,13 +107,13 @@ export default function Home() {
                   max="500"
                   value={priceMax}
                   onChange={(e) => setPriceMax(Number(e.target.value))}
-                  className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+                  className="w-full h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer accent-amber-500"
                 />
               </div>
 
               {/* Food Pairing */}
               <div className="md:col-span-2">
-                <label className="block text-sm font-semibold text-gray-700 mb-2">
+                <label className="block text-sm font-semibold text-amber-300 mb-3">
                   Alimento para Acompanhar (Opcional)
                 </label>
                 <input
@@ -126,7 +121,7 @@ export default function Home() {
                   placeholder="Ex: carne vermelha, queijo, peixe..."
                   value={foodPairing}
                   onChange={(e) => setFoodPairing(e.target.value)}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-red-500 focus:border-transparent"
+                  className="w-full px-4 py-2 bg-slate-700 border border-amber-600 text-white placeholder-gray-400 rounded-lg focus:ring-2 focus:ring-amber-500 focus:border-transparent transition"
                 />
               </div>
             </div>
@@ -135,49 +130,54 @@ export default function Home() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-red-600 hover:bg-red-700 disabled:bg-gray-400 text-white font-bold py-3 px-4 rounded-lg transition duration-200"
+              className="w-full bg-gradient-to-r from-amber-600 to-red-600 hover:from-amber-700 hover:to-red-700 disabled:from-gray-600 disabled:to-gray-600 text-white font-bold py-3 px-4 rounded-lg transition duration-200 text-lg"
             >
-              {loading ? 'Buscando...' : 'Buscar Vinhos'}
+              {loading ? '⏳ Buscando...' : '🔍 Buscar Vinhos'}
             </button>
           </form>
         </div>
 
         {/* Results */}
         {results.length > 0 && (
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {results.map((wine) => (
-              <div
-                key={wine.id}
-                className="bg-white rounded-lg shadow-lg p-6 hover:shadow-xl transition"
-              >
-                <h3 className="text-xl font-bold text-gray-800 mb-2">
-                  {wine.name}
-                </h3>
-                <p className="text-sm text-gray-600 mb-4">{wine.producer}</p>
+          <div>
+            <h2 className="text-2xl font-bold text-amber-300 mb-6">
+              {results.length} Vinho{results.length !== 1 ? 's' : ''} Encontrado{results.length !== 1 ? 's' : ''}
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {results.map((wine) => (
+                <div
+                  key={wine.id}
+                  className="bg-slate-800 border border-amber-700 rounded-lg shadow-lg p-6 hover:shadow-2xl hover:border-amber-500 transition duration-300"
+                >
+                  <h3 className="text-xl font-bold text-amber-300 mb-2">
+                    {wine.name}
+                  </h3>
+                  <p className="text-sm text-gray-400 mb-4">{wine.producer}</p>
 
-                <div className="space-y-2 text-sm">
-                  <p>
-                    <strong>País:</strong> {wine.country}
-                  </p>
-                  <p>
-                    <strong>Preço:</strong> R$ {wine.price}
-                  </p>
-                  {wine.rating && (
+                  <div className="space-y-2 text-sm text-gray-300">
                     <p>
-                      <strong>Rating:</strong> ⭐ {wine.rating}/5
+                      <span className="text-amber-300 font-semibold">País:</span> {wine.country}
                     </p>
-                  )}
+                    <p>
+                      <span className="text-amber-300 font-semibold">Preço:</span> R$ {wine.price}
+                    </p>
+                    {wine.rating && (
+                      <p>
+                        <span className="text-amber-300 font-semibold">Rating:</span> ⭐ {wine.rating}/5
+                      </p>
+                    )}
+                  </div>
                 </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
 
         {/* No Results */}
         {!loading && results.length === 0 && (
-          <div className="text-center text-white">
-            <p className="text-lg">
-              Nenhum vinho encontrado. Tente ajustar os filtros!
+          <div className="text-center">
+            <p className="text-xl text-gray-400">
+              👇 Ajuste os filtros e clique em "Buscar Vinhos" para começar!
             </p>
           </div>
         )}
