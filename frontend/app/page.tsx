@@ -16,9 +16,10 @@ export default function Home() {
     setLoading(true);
 
     try {
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/wines/search?wineType=${wineType}&sweetness=${sweetness}&priceMin=${priceMin}&priceMax=${priceMax}`
-      );
+      const apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/api/wines/search?wineType=${wineType}&sweetness=${sweetness}&priceMin=${priceMin}&priceMax=${priceMax}`;
+      console.log('Fetching:', apiUrl);
+
+      const response = await fetch(apiUrl);
 
       if (!response.ok) throw new Error('Erro ao buscar vinhos');
 
